@@ -11,6 +11,7 @@
 		viper-backward-word
 		viper-beginning-of-line
 		viper-del-backward-char-in-insert
+		viper-delete-char
 		viper-end-of-word
 		viper-ex
 		viper-forward-char

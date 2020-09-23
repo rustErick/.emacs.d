@@ -5,7 +5,6 @@
   (add-to-list'package-archives (cons"melpa" url) t))
 (when (>= emacs-major-version 24)
   (add-to-list'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-
 (setq custom-file "~/.emacs.d/custom.el")
 (setq default-directory "d:/")
 (load custom-file)
@@ -13,6 +12,45 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
 (set-cursor-color "white")
+
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(setq initial-scratch-message "
+                ███████████████████████████████████████████
+                █                                         █
+                █                                         █
+                █                                         █
+                ███████████████████████████████████████████
+                ███████████████████████████████████████████
+                █                                         █
+               █        ╦  ┌─┐┌┬┐  ┬─┐┌─┐┌─┐┌┬┐┬ ┬         █
+               █        ║  ├─┤│││  ├┬┘├┤ ├─┤ ││└┬┘         █
+               █        ╩  ┴ ┴┴ ┴  ┴└─└─┘┴ ┴─┴┘ ┴  o       █
+               █                                           █
+           ████ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █████
+       █████   █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █    █████
+      █                                                              █
+     █                                                                █
+    █                                                                  █
+   █                                                                    █
+  █       █████       ████████████         ████████████     █████        █
+  █            █    ██            ██     ██           ██   █             █
+  █             ████       ██      ███ ███       ██    ████              █
+   █                ██            ██     ██           ██                █
+    █                 ████████████         ████████████                █
+     █                                                                █
+      █                                                              █
+       █████                                                    █████
+           ███               ██████████████████               ███
+             ███            █ █ █ █ █ █ █ █ █ ██            ███
+               ███          ██ █ █ █ █ █ █ █ █ █          ███
+                 ███         ██████████████████         ███
+                   ███                                ███
+                     ███                            ███
+                       ███                        ███
+                         ██████████████████████████ ")
 ;;;;;;;;;;;;;;;;;;
 ;; VIPER MODE - VIM
 ;;;;;;;;;;;;;;;;;
@@ -142,6 +180,7 @@
 ;;;;;;;;;;;;;;;;;
 (use-package emmet-mode
   :ensure t
+  :diminish emmet-modem
   :bind ("M-o" . emmet-expand-line)
   :init
   (add-hook 'css-mode-hook 'emmet-mode)
@@ -189,26 +228,47 @@
 	(defhydra hydra-dumb-jump (:hint nil)
 	  "
          [_g_] Go     [_o_] Other window  [_e_] Go external
-         [_b_] Back   [_p_] Prompt        [_d_] Description
+         [_b_] Back   [_p_] Prompt        [_d_] Dired
       "
 	  ("g" dumb-jump-go)
 	  ("o" dumb-jump-go-other-window)
 	  ("e" dumb-jump-go-prefer-external)
 	  ;; ("x" dumb-jump-go-prefer-external-other-window "Go external other window")
 	  ("p" dumb-jump-go-prompt)
-	  ("d" dumb-jump-quick-look)
-	  ("b" dumb-jump-back))
-	))
+	  ;; ("d" dumb-jump-quick-look)
+	  ("b" dumb-jump-back)
+	  ("d" dired-jump)
+	   ))
+	)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; AUTOCOMPLETE FOR WORD REPEAT
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;
+(global-set-key (kbd "M-h") 'company-capf)
 (use-package company
-  :ensure t
-  :init
-  (progn
-	(global-company-mode t)
-	)
-  :config (add-hook 'prog-mode-hook 'company-mode))
+  :diminish company-mode
+  :defines
+  (company-dabbrev-ignore-case company-dabbrev-downcase)
+  ;; :bind
+  ;; (:map company-active-map
+		;; ("<tab>" . company-complete-common-or-cycle))
+  :custom
+  (company-idle-delay .2)
+  (company-tooltip-idle-delay .2)
+  (company-echo-delay 0)
+  (company-minimum-prefix-length 1)
+  :hook
+  (after-init . global-company-mode)
+  :config
+  ;; (use-package company-posframe
+    ;; :hook (company-mode . company-posframe-mode))
+  (use-package company-quickhelp
+    :defines company-quickhelp-delay
+    :bind (:map company-active-map
+                ("C-c h" . company-quickhelp-manual-begin))
+    :hook (global-company-mode . company-quickhelp-mode)
+    :custom (company-quickhelp-delay 0.3)))
+  ;; )
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org bullets
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -222,18 +282,25 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 (defhydra hydra-scroll-window (:hint nil)
 "
-   [_k_] Up  [_j_] Down  [_l_] Left  [_h_] Right
+     [_k_] Up           [_j_] Down          [_l_] Left
+     [_h_] Right        [_p_] Up window    [_n_] Down window
 "
 ("j" viper-scroll-down-one)
 ("k" viper-scroll-up-one)
 ("l" scroll-left)
 ("h" scroll-right)
+("p" (lambda () (interactive )
+	   (scroll-other-window +1)
+	   ))
+("n" (lambda () (interactive)
+       (scroll-other-window -1)
+       ))
   )
 (global-set-key (kbd "M-ñ s") 'hydra-scroll-window/body)
 
 (defhydra hydra-move-avy (:hint nil)
   "
-    [_l_] Line    [_r_] Region    [_m_] Center   [_n_] Next [_p_] Previous
+    [_l_] Line    [_r_] Region    [_m_] Center   [_n_] Next  [_p_] Previous
 "
   ("l" avy-move-line)
   ("r" avy-move-region)

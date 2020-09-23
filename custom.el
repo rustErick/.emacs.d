@@ -46,3 +46,5 @@
  '(vertical-border ((((type w32)) (:foreground "#5d4d7a")))))
 
 (global-set-key (kbd "M-m") 'viper-intercept-ESC-key)
+(global-set-key (kbd "M-p") 'previous-line)
+(global-set-key (kbd "M-n") 'next-line)

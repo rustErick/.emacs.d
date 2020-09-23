@@ -18,6 +18,6 @@
 (define-key viper-vi-basic-map (kbd "z r") 'hydra-restclient/body)
 (define-key viper-vi-basic-map (kbd "z s") 'hydra-scroll-window/body)
 (define-key viper-vi-basic-map (kbd "z m") 'hydra-move-avy/body)
-(define-key viper-vi-basic-map (kbd "z f") 'hydra-find-word)
+(define-key viper-vi-basic-map (kbd "z f") 'hydra-find-word/body)
 (define-key viper-vi-basic-map (kbd "z b") 'switch-to-buffer)
 (define-key viper-vi-basic-map (kbd "z k") 'kill-buffer)
