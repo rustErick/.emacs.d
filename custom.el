@@ -22,6 +22,7 @@
  '(show-paren-mode t)
  '(show-trailing-whitespace t)
  '(speedbar-indentation-width 2)
+ '(speedbar-show-unknown-files t)
  '(tab-width 4)
  '(tool-bar-mode nil)
  '(truncate-lines t))
@@ -48,3 +49,4 @@
 (global-set-key (kbd "M-m") 'viper-intercept-ESC-key)
 (global-set-key (kbd "M-p") 'previous-line)
 (global-set-key (kbd "M-n") 'next-line)
+(global-set-key (kbd "M-ñ a") 'find-file)

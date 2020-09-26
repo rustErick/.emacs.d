@@ -4,6 +4,7 @@
 (setq mc/cmds-to-run-for-all
       '(
 		ace-window
+		emmet-expand-line
 		hydra-multiple-cursors/body
 		undo-tree-visualize
 		viper-append
@@ -25,6 +26,7 @@
 
 (setq mc/cmds-to-run-once
       '(
+		hydra-multiple-cursors/mc/insert-letters
 		hydra-multiple-cursors/mc/insert-letters-and-exit
 		hydra-multiple-cursors/mc/insert-numbers-and-exit
 		hydra-multiple-cursors/mc/mark-next-like-this
@@ -32,4 +34,6 @@
 		hydra-multiple-cursors/mc/unmark-next-like-this
 		hydra-multiple-cursors/mc/unmark-previous-like-this
 		org-self-insert-command
+		text-scale-decrease
+		text-scale-increase
 		))

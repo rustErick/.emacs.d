@@ -21,3 +21,4 @@
 (define-key viper-vi-basic-map (kbd "z f") 'hydra-find-word/body)
 (define-key viper-vi-basic-map (kbd "z b") 'switch-to-buffer)
 (define-key viper-vi-basic-map (kbd "z k") 'kill-buffer)
+(define-key viper-vi-basic-map (kbd "t") 'viper-exit-minibuffer)

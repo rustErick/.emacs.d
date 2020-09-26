@@ -8,6 +8,7 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (setq default-directory "d:/")
 (load custom-file)
+
 (add-to-list 'before-save-hook 'delete-trailing-whitespace)
 (fset 'yes-or-no-p 'y-or-n-p)
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
@@ -88,6 +89,7 @@
 (use-package ace-window
   :ensure t
   :defer 1
+  :bind ("C-x o" . ace-window)
   :config
   (set-face-attribute
    'aw-leading-char-face nil
@@ -206,9 +208,9 @@
       "
    -----------Mark-----------------     --------------Unmark-----------
     [_j_] Down       [_k_] Up            [_p_] Previous  [_n_] Next
-    [_0_] Numbers    [_l_] Letters       [_a_] Mark all
+    [_0_] Numbers    [_l_] Letters       [_t_] Mark all
         "
-	  ("a" mc/mark-all-like-this)
+	  ("t" mc/mark-all-like-this)
 	  ("j" mc/mark-next-like-this)
 	  ("k" mc/mark-previous-like-this)
 	  ("n" mc/unmark-previous-like-this)
