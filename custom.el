@@ -11,12 +11,11 @@
  '(fringe-mode '(1 . 1) nil (fringe))
  '(global-auto-revert-mode t)
  '(inhibit-startup-screen t)
- '(line-number-mode nil)
  '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(mode-line-percent-position nil)
  '(package-selected-packages
-   '(yasnippet undo-tree restclient org-bullets multiple-cursors rjsx-mode hydra emmet-mode dumb-jump company-quickhelp company ace-window use-package))
+   '(auto-package-update rust-mode yasnippet undo-tree restclient org-bullets multiple-cursors rjsx-mode hydra emmet-mode dumb-jump company-quickhelp company ace-window use-package))
  '(scroll-bar-mode nil)
  '(sgml-basic-offset 4)
  '(show-paren-mode t)

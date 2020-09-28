@@ -45,13 +45,13 @@
       █                                                              █
        █████                                                    █████
            ███               ██████████████████               ███
-             ███            █ █ █ █ █ █ █ █ █ ██            ███
-               ███          ██ █ █ █ █ █ █ █ █ █          ███
+             ███            █ ██  ██  ██  ██  ██            ███
+               ███          ██  ██  ██  ██  ██ █          ███
                  ███         ██████████████████         ███
                    ███                                ███
                      ███                            ███
                        ███                        ███
-                         ██████████████████████████ ")
+                         ██████████████████████████")
 ;;;;;;;;;;;;;;;;;;
 ;; VIPER MODE - VIM
 ;;;;;;;;;;;;;;;;;
@@ -182,7 +182,7 @@
 ;;;;;;;;;;;;;;;;;
 (use-package emmet-mode
   :ensure t
-  :diminish emmet-modem
+  :diminish emmet-mode
   :bind ("M-o" . emmet-expand-line)
   :init
   (add-hook 'css-mode-hook 'emmet-mode)
@@ -321,3 +321,14 @@
   ("q" query-replace)
   ("f" find-file))
 (global-set-key (kbd "M-ñ f") 'hydra-find-word/body)
+(use-package rust-mode
+  :ensure t
+  :mode "\\.rs\\'"
+  :config (setq rust-formart-on-save t)
+  )
+(use-package auto-package-update
+  :ensure t
+  :config
+  (setq auto-package-update-delete-old-versions t)
+  (setq auto-package-update-hide-results t)
+  (auto-package-update-maybe))
