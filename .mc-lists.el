@@ -3,10 +3,9 @@
 
 (setq mc/cmds-to-run-for-all
       '(
-		ace-window
 		emmet-expand-line
 		hydra-multiple-cursors/body
-		undo-tree-visualize
+		indent-for-tab-command
 		viper-append
 		viper-backward-char
 		viper-backward-word
@@ -15,9 +14,9 @@
 		viper-delete-char
 		viper-end-of-word
 		viper-ex
+		viper-exit-minibuffer
 		viper-forward-char
 		viper-goto-eol
-		viper-insert
 		viper-intercept-ESC-key
 		viper-next-line
 		viper-open-line
@@ -26,6 +25,7 @@
 
 (setq mc/cmds-to-run-once
       '(
+		ace-window
 		hydra-multiple-cursors/mc/insert-letters
 		hydra-multiple-cursors/mc/insert-letters-and-exit
 		hydra-multiple-cursors/mc/insert-numbers-and-exit
@@ -36,4 +36,6 @@
 		org-self-insert-command
 		text-scale-decrease
 		text-scale-increase
+		undo-tree-visualize
+		viper-insert
 		))
