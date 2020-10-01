@@ -119,11 +119,11 @@
       ("l" enlarge-window-horizontally))
     (defhydra hydra-window-frame (:color red :hint nil)
       "
-       [_f_] New Frame    [_x_] Delete Frame  [_s_] Shell
+       [_f_] New Frame      [_s_] Shell
        [_l_] List colors  [_e_] Speedbar
 "
       ("f" make-frame)
-      ("x" delete-frame)
+      ;; ("x" delete-frame)
 	  ("s" shell)
 	  ("l" list-colors-display)
 	  ("e" speedbar))
@@ -332,3 +332,45 @@
   (setq auto-package-update-delete-old-versions t)
   (setq auto-package-update-hide-results t)
   (auto-package-update-maybe))
+
+(use-package org
+  :ensure
+  :bind (
+		 ("C-c a" . org-agenda)
+		 ("C-c c" . org-capture)
+		 ("C-c b" . org-table-create)
+		 ("M-ñ" . org-todo)
+		 ))
+(setq org-agenda-files '("~/Documents/org/notes.org"
+						 "~/Documents/org/tasks.org"
+						 "~/Documents/org/ideas.org"
+						 "~/Documents/org/project.org"))
+(setq org-todo-keywords
+	  '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE")))
+;; (setq org-tag-alist '(("@work" . ?w) ("@home" . ?h) ("laptop" . ?l)))
+(setq org-capture-templates
+      (quote (
+              ("n"         ;; hotkey
+               "Notes" ;; name
+               entry       ;; type
+               (file+datetree "~/Documents/org/notes.org") ;; target
+               "* TODO %^{title note} %T \n  1. %^{write a note}" ;; template
+               )
+              ("t" "Schedule an event or a task" entry
+               (file+datetree "~/Documents/org/tasks.org")
+               "* TODO [#%^{Priority}] %^{Schedule of event or task}\n** %^{title of event or task}\n SCHEDULED: %^t\n  1. %^{write a description:}"
+               )
+			  ("i" "Ideas" entry
+               (file+datetree "~/Documents/org/ideas.org")
+               "* TODO [0%] %^{Title idea} %T\n  - [-] %^{Description of idea}")
+              ("b" "Add a book to read" entry
+               (file+headline "~/Documents/org/books.org" "Books to read")
+               "* TODO %^{Book name}\n  - %^{Why to read this book?}"
+               )
+			  ("e" "Notes of english" item
+			   (file+datetree "~/Documents/org/english.org")
+			   "%^{title}")
+			  ("p" "Projects" item
+			   (file+datetree "~/Documents/org/project.org")
+			   "[-] %^{name project} - %^{description the project} %t")
+              )))
