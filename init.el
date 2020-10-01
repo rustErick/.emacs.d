@@ -374,3 +374,24 @@
 			   (file+datetree "~/Documents/org/project.org")
 			   "[-] %^{name project} - %^{description the project} %t")
               )))
+** (use-package org
+   :config
+   (progn
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((dot . t)
+     (ditaa . t)
+     (emacs-lisp . t)
+     (python . t)
+     (shell . t)
+     (calc . t)
+     (sqlite . t)
+     (http . t)
+     (ledger . t)
+     (shell . t)
+     (R . t)
+     (jupyter . t)))
+  (setq org-babel-python-command "python3")
+  (setq python-shell-interpreter "python3")
+  (add-to-list 'org-src-lang-modes '("dot" . graphviz-dot))))
